@@ -1,5 +1,5 @@
 class DocumentsController < ApplicationController
-  before_action :set_document, only: %i[ show edit update destroy ]
+  before_action :set_document, only: %i[ show update destroy ]
   before_action :set_paper_trail_whodunnit
 
   # GET /documents or /documents.json
@@ -23,6 +23,7 @@ class DocumentsController < ApplicationController
   # POST /documents or /documents.json
   def create
     @document = Document.new(document_params)
+    @document.user = current_user
 
     respond_to do |format|
       if @document.save
@@ -37,14 +38,10 @@ class DocumentsController < ApplicationController
 
   # PATCH/PUT /documents/1 or /documents/1.json
   def update
-    respond_to do |format|
-      if @document.update(document_params)
-        format.html { redirect_to @document, notice: "Document was successfully updated." }
-        format.json { render :show, status: :ok, location: @document }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @document.errors, status: :unprocessable_entity }
-      end
+    if @document.update(document_params)
+      render json: { message: "Saved successfully!" }, status: :ok
+    else
+      render json: { error: "Update failed", errors: @document.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

@@ -4,14 +4,23 @@
     <%= document.title %>
   </p>
 
-  <p>
-    <strong>Content:</strong>
-    <%= document.content %>
-  </p>
+  <div data-controller="autosave"
+      data-autosave-url="<%= document_path(@document) %>">
 
-  <p>
-    <strong>User:</strong>
-    <%= document.user_id %>
-  </p>
+    <input id="trix-editor"
+          type="hidden"
+          name="document[content]"
+          value="<%= @document.content %>"
+          data-autosave-target="input">
 
+    <trix-editor input="trix-editor"
+                data-action="trix-change->autosave#save"></trix-editor>
+
+    <div id="saving-indicator"
+        class="saving-indicator"
+        data-autosave-target="status">
+      Saved ✅
+    </div>
+
+  </div>
 </div>

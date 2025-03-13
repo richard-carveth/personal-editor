@@ -1,2 +1,19 @@
 // Sassy
 @import "bootstrap";
+@import "editor";
+@import "actiontext";
+
+
+.saving-indicator {
+  position: fixed;
+  bottom: 10px;
+  right: 15px;
+  font-size: 0.9rem;
+  color: #6c757d; // Subtle grey color
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.saving-indicator.visible {
+  opacity: 1;
+}

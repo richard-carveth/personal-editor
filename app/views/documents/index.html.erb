@@ -6,11 +6,28 @@
 
 <div id="documents">
   <% @documents.each do |document| %>
-    <%= render document %>
+    <%= document.title %>
     <p>
       <%= link_to "Show this document", document %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New document", new_document_path %>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newDocumentModal">
+  New Document
+</button>
+
+<div class="modal fade" id="newDocumentModal" tabindex="-1" aria-labelledby="newDocumentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newDocumentModalLabel">New Document</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body
+      ">
+        <%= render "form", document: Document.new %>
+      </div>
+    </div>
+  </div>
+</div>

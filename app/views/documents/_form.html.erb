@@ -16,15 +16,7 @@
     <%= form.text_field :title %>
   </div>
 
-  <div>
-    <%= form.label :content, style: "display: block" %>
-    <%= form.textarea :content %>
-  </div>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
+  <%= form.hidden_field :content, value: "New Document" %>
 
   <div>
     <%= form.submit %>
